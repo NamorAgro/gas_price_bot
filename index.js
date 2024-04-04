@@ -102,7 +102,7 @@ async function start() {
 
     bot.setMyCommands([
         {command:'/start', description: 'Приветствие'},
-        {command:'/MW', description: 'Последняя MW'},
+        {command:'/mw', description: 'Последняя MW'},
         {command:'/joke', description: 'Рассказать шутку'},
     ])
     
@@ -124,7 +124,7 @@ async function start() {
             return;
         }
 
-        if (text === '/price'){
+        if (text === '/mw'){
             const message = await makeRequest();
             return bot.sendMessage(chatId, `Сейчас на бирже MW: ${message}`)
         }
