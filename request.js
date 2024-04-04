@@ -32,17 +32,21 @@ function makeUrl (){
 
 async function fetchData(url) {
   try {
-    // Replace 'yourURLhere' with the actual URL you're fetching data from
     const response = await fetch(url);
     const data = await response.json();
 
-    // Assuming 'timeseries' is directly within the fetched data and
-    // the 'value' field is within the first object of the 'timeseries' array
-    // and it is an array where you need the first value.
-    return data.data.timeseries[0].values[0]
+    if (data && data.data && data.data.timeseries && data.data.timeseries.length > 0 && data.data.timeseries[0].values && data.data.timeseries[0].values.length > 0) {
+
+      return data.data.timeseries[0].values[0];
+    } else {
+
+      console.log('The expected value is undefined.');
+      return null; 
+    }
     
   } catch(error) {
     console.error('Fetching data failed:', error);
+    return null
   }
 }
 

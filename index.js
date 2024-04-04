@@ -13,14 +13,13 @@ let subscribedUsers = [];
 async function loadUsersFromFile() {
   try {
       const data = await fs.readFile('subscribedUsers.json', 'utf8');
-      return JSON.parse(data); // Ensure this returns the array
+      return JSON.parse(data); 
   } catch (err) {
       console.error('Error loading users from file:', err);
-      return []; // Return an empty array if there's an error or file doesn't exist
+      return []; 
   }
 }
 
-// Example of writing to a file
 async function saveUsersToFile(users) {
   try {
       await fs.writeFile('subscribedUsers.json', JSON.stringify(users, null, 2));
@@ -130,7 +129,6 @@ async function start() {
         }
 
         if (text === '/joke'){
-          // Define the URL from which you want to scrape the joke
           const jokeURL = 'https://nekdo.ru/random/';
           try {
               const message = await tellJoke(jokeURL);
@@ -150,7 +148,12 @@ async function start() {
     })
 
     setInterval(async () => {
-        const message = await makeRequest();
+      const message = await makeRequest();
+      if (message === null) {
+          console.log('Message is null, skipping this interval.');
+          return; 
+      }
+  
         changeObjValues(curentValue, message)
         var [mismatch, found] = compareObjectsAndAct(curentValue, prevValue);
         if(mismatch)
