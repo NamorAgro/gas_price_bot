@@ -102,7 +102,7 @@ async function start() {
 
     bot.setMyCommands([
         {command:'/start', description: 'Приветствие'},
-        {command:'/price', description: 'Последняя цена'},
+        {command:'/MW', description: 'Последняя MW'},
         {command:'/joke', description: 'Рассказать шутку'},
     ])
     
@@ -115,7 +115,7 @@ async function start() {
             await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/3de/bab/3debab3b-d6f5-4190-8554-ea1a8a59361e/43.webp');
             await bot.sendMessage(chatId, 'Привет! Я буду помагать тебе заработать Деньжат! $$$');
             const message = await makeRequest();
-            await bot.sendMessage(chatId, `Сейчас цена на бирже ${message}`);
+            await bot.sendMessage(chatId, `Сейчас на бирже MW: ${message}`);
             
             if (!subscribedUsers.includes(chatId)) {
                 subscribedUsers.push(chatId);
@@ -126,7 +126,7 @@ async function start() {
 
         if (text === '/price'){
             const message = await makeRequest();
-            return bot.sendMessage(chatId, `Сейчас цена на бирже ${message}`)
+            return bot.sendMessage(chatId, `Сейчас на бирже MW: ${message}`)
         }
 
         if (text === '/joke'){
@@ -157,7 +157,7 @@ async function start() {
         for (let i = 0; i < subscribedUsers.length; i++) {
             const chatId = subscribedUsers[i];
             try {
-                await bot.sendMessage(chatId, `${found} \r\nцена: ${message}`);
+                await bot.sendMessage(chatId, `${found} \r\nMW: ${message}`);
             } catch (error) {
                 if (error.response && error.response.body && error.response.body.error_code === 403) {
                     subscribedUsers.splice(i, 1);

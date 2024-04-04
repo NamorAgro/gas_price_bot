@@ -26,6 +26,7 @@ function makeUrl (){
   }
 
   var url = `https://api-baltic.transparency-dashboard.eu/api/v1/export?id=current_balancing_state&start_date=${startDate.year}-${startDate.month}-${startDate.day}T${startDate.hours}%3A${startDate.minutes}&end_date=${endDate.year}-${endDate.month}-${endDate.day}T${endDate.hours}%3A${endDate.minutes}&output_time_zone=EET&output_format=json&json_header_groups=1&download=0`
+  console.log(url)
   return url
 }
 
@@ -44,3 +45,10 @@ async function fetchData(url) {
     console.error('Fetching data failed:', error);
   }
 }
+
+
+makeRequest().then(data => {
+  console.log(data);
+}).catch(error => {
+  console.error('Error:', error);
+});
