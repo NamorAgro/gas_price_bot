@@ -193,6 +193,5 @@ function changeObjValues(object, curentValue){
   object.biggerZero.value = curentValue > 0;
   object.biggerFivety.value = curentValue > 50;
   object.smallerMinusFivety.value = curentValue < -50;
-  console.log(object)
   console.log(subscribedUsers)
 }
