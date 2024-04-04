@@ -1,5 +1,5 @@
 import TelegramApi from 'node-telegram-bot-api';
-import findDynamicH1Title from './take_data.js';
+import makeRequest from './request.js';
 import tellJoke from './joke.js';
 import  { BOT_TOKEN} from './config.js';
 import { promises as fs } from 'fs';
@@ -114,7 +114,7 @@ async function start() {
           if (text === '/start'){
             await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/3de/bab/3debab3b-d6f5-4190-8554-ea1a8a59361e/43.webp');
             await bot.sendMessage(chatId, 'Привет! Я буду помагать тебе заработать Деньжат! $$$');
-            const message = await findDynamicH1Title();
+            const message = await makeRequest();
             await bot.sendMessage(chatId, `Сейчас цена на бирже ${message}`);
             
             if (!subscribedUsers.includes(chatId)) {
@@ -125,7 +125,7 @@ async function start() {
         }
 
         if (text === '/price'){
-            const message = await findDynamicH1Title();
+            const message = await makeRequest();
             return bot.sendMessage(chatId, `Сейчас цена на бирже ${message}`)
         }
 
@@ -150,7 +150,7 @@ async function start() {
     })
 
     setInterval(async () => {
-        const message = await findDynamicH1Title();
+        const message = await makeRequest();
         changeObjValues(curentValue, message)
         var [mismatch, found] = compareObjectsAndAct(curentValue, prevValue);
         if(mismatch)
