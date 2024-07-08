@@ -48,7 +48,7 @@ var scenarioObject = {
         for (let i = 0; i < subscribedUsers.length; i++) {
           const chatId = subscribedUsers[i];
           try {
-            await bot.sendMessage(chatId, `Цена перешла отметку 0 и стала выше.`);
+            await bot.sendMessage(chatId, `🔴 MW: перешла отметку 0 и стала выше.`);
           } catch (error) {
             if (error.response && error.response.body && error.response.body.error_code === 403) {
               subscribedUsers.splice(i, 1);
@@ -77,7 +77,7 @@ var scenarioObject = {
         for (let i = 0; i < subscribedUsers.length; i++) {
           const chatId = subscribedUsers[i];
           try {
-            await bot.sendMessage(chatId, `Цена перешла отметку в -50 и стала ниже.`);
+            await bot.sendMessage(chatId, `🟢 Цена перешла отметку в -50 и стала ниже.`);
           } catch (error) {
             if (error.response && error.response.body && error.response.body.error_code === 403) {
               subscribedUsers.splice(i, 1);
